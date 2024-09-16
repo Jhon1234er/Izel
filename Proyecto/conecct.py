@@ -1,13 +1,17 @@
 from pymongo import errors
-from menu import*
 import pymongo
+from menu import*
+
+Myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+Mydb = Myclient["INFINITY"]
+Autenti = Mydb["Autentificacion"]
+Vacunas = Mydb["Vacunas"]
+Consulta =Mydb["Consulta"]
+Quirurgico = Mydb["Quirurgicos"]
+Antropo = Mydb["Antropometricos"]
+Antecedentes = Mydb["Antecedentes"]
+
 def verificar(Email,Pin):
-    try:
-        Myclient=pymongo.MongoClient("mongodb://localhost:27017/")
-        Mydb=Myclient["INFINITY"]
-        Autenti=Mydb["Autentificacion"]
-        Persona=Mydb["Persona"]
-        
         query = {
             "Correo":Email,
             "Contraseña":Pin
@@ -16,26 +20,57 @@ def verificar(Email,Pin):
         usuario=Autenti.find_one(query)
         
         if usuario:
-            persona = Persona.find_one({"correo": Email})
-            if persona:
-                print(f"Persona encontrada en collection_Persona: {persona}")                  
-                
-                nombre_objeto = persona.get("Nombre", {})
-                print(f"Nombre objeto: {nombre_objeto}")  
-                
-                if isinstance(nombre_objeto, dict):
-                    nombre1 = nombre_objeto.get("Nombre1", "Nombre no disponible")
-                    print(f"Nombre1 encontrado: {nombre1}") 
-                    return nombre1
+            return True
         else:
             print("Cuenta no encontrada")
             return False
-    except errors.ConnectionError as e:
-        print(f"error de conexion:{e}")
-        return False
-    except errors.ConnectionError as e:
-        print(f"Error en pymongo: {e}")
-        return False
-    
-    finally:
-        Myclient.close()
+        
+def registrar_usuario(correo, contraseña, tipo):
+        if Autenti.find_one({"Correo": correo}):
+            print("El correo electrónico ya está registrado.")
+            return
+        
+        nuevo_usuario = {
+            "Correo": correo,
+            "Contraseña": contraseña,
+            "Tipo": tipo
+        }
+        
+        Autenti.insert_one(nuevo_usuario)
+
+
+def tipo_usuario(correo):
+        query = {"Correo": correo}
+        usuario = Autenti.find_one(query)
+        
+        if usuario:
+            return usuario.get("Tipo")
+        else:
+            print("Usuario no encontrado")
+            return None
+
+def Datos_Vacunas(Numero):
+    resultados = Vacunas.find({"Usuario_id": Numero})
+    vacunas = [x for x in resultados]
+    return vacunas
+
+def Datos_Consulta(Numero):
+    resultados = Consulta.find({"Usuario_id": Numero})
+    consulta = [x for x in resultados]
+    return consulta
+
+def Datos_Quirurgico (Numero):
+    resultados = Quirurgico.find({"Usuario_id": Numero})
+    quirur = [x for x in resultados]
+    return quirur 
+
+def Datos_Antropometricos(Numero):
+    resultados = Antropo.find({"Usuario_id": Numero})
+    date = [x for x in resultados]
+    return date
+
+def Datos_Antecedentes(Numero):
+    resultados = Antecedentes.find({"Usuario_id": Numero})
+    antes = [x for x in resultados]
+    return antes
+
