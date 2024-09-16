@@ -1,15 +1,16 @@
 from pymongo import errors
 import pymongo
-from menu import*
+
 
 Myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-Mydb = Myclient["INFINITY"]
+Mydb = Myclient["Izel"]
 Autenti = Mydb["Autentificacion"]
 Vacunas = Mydb["Vacunas"]
 Consulta =Mydb["Consulta"]
 Quirurgico = Mydb["Quirurgicos"]
 Antropo = Mydb["Antropometricos"]
 Antecedentes = Mydb["Antecedentes"]
+Formula= Mydb ["FormulaMedica"]
 
 def verificar(Email,Pin):
         query = {
@@ -74,3 +75,41 @@ def Datos_Antecedentes(Numero):
     antes = [x for x in resultados]
     return antes
 
+def agregarDatosConsulta(Numero,descripcion,motivo,diagnostico,planTerapeutico,epicrisis,nombreAcompañante,parentescoAcompañante,conclusiones):
+    nuevaConsulta={
+         "Usuario_id":Numero,
+         "Descripcion_Enfermedad":descripcion,
+         "Motivo_Consulta":motivo,
+         "Diagnostico":diagnostico,
+         "Plan_Terapeutico":planTerapeutico,
+         "Epicrisis":epicrisis,
+         "Nombre_Acompañante":nombreAcompañante,
+         "Parentesco_Acompañante":parentescoAcompañante,
+         "Conclusiones":conclusiones
+    }
+    Consulta.insert_one(nuevaConsulta)
+
+def agregarDatosATP(Numero,peso,talla,imc,temperatura,pulso,frecuencia_R,presion_A):
+    nuevoDatosATP={
+          'Usuario_id': Numero,
+          'Peso': peso,
+          'Talla': talla,
+          'IMS': imc,
+          'Temperatura': temperatura,
+          'Pulso': pulso,
+          'Frecuencia_Respiratoria': frecuencia_R,
+          'Presion_Arterial': presion_A
+     }
+    Antropo.insert_one(nuevoDatosATP)
+
+def agregarFormula(codigo_F,cantidad,duracion,concentracion,medicamento,indicaciones,via_Administracion):
+    nuevaFormula={
+         "CodigoFormula":codigo_F,
+         "NombreMedicamento":medicamento,
+         "CantidadMedicamento":cantidad,
+         "DuracionMedicamento":duracion,
+         "Concentracion":concentracion,
+         "Indicaciones":indicaciones,
+         "ViaAdministracion":via_Administracion
+    }
+    Formula.insert_one(nuevaFormula)
