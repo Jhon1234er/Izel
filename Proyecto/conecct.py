@@ -1,15 +1,16 @@
 from pymongo import errors
 import pymongo
-from menu import*
+
 
 Myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-Mydb = Myclient["INFINITY"]
+Mydb = Myclient["Izel"]
 Autenti = Mydb["Autentificacion"]
 Vacunas = Mydb["Vacunas"]
 Consulta =Mydb["Consulta"]
 Quirurgico = Mydb["Quirurgicos"]
 Antropo = Mydb["Antropometricos"]
 Antecedentes = Mydb["Antecedentes"]
+Persona = Mydb["Persona"]
 
 def verificar(Email,Pin):
         query = {
@@ -25,18 +26,17 @@ def verificar(Email,Pin):
             print("Cuenta no encontrada")
             return False
         
-def registrar_usuario(correo, contraseña, tipo):
+def registrar_Cuenta(correo, contraseña, tipo):
         if Autenti.find_one({"Correo": correo}):
-            print("El correo electrónico ya está registrado.")
-            return
+            return print ("El correo electrónico ya está registrado.")
+        else:
+            nueva_Cuenta = {
+                "Correo": correo,
+                "Contraseña": contraseña,
+                "Tipo": tipo
+            }
         
-        nuevo_usuario = {
-            "Correo": correo,
-            "Contraseña": contraseña,
-            "Tipo": tipo
-        }
-        
-        Autenti.insert_one(nuevo_usuario)
+        Autenti.insert_one(nueva_Cuenta)
 
 
 def tipo_usuario(correo):
@@ -74,3 +74,35 @@ def Datos_Antecedentes(Numero):
     antes = [x for x in resultados]
     return antes
 
+# def Registrar_Usuario(Numero):
+#         if Persona.find_one({"Numero_Documento": Numero}):
+#             print("El usuario ya tiene su registro completo.")
+#             return
+#         else:
+#             Nuevo_Registro = {
+#                 "Nombre":{
+#                     "Nombre1":
+#                     "Nombre2":
+#                     },
+#                 "Apellido":{
+#                     "Apellido1":
+#                     "Apellido2":
+#                     },
+#                 "Genero":
+#                 "Rh":
+#                 "Correo":
+#                 "Teléfono":
+#                 "Tipo_Documento":
+#                 "Numero_Documento":
+#                 "Fecha_Nacimiento":
+#                 "Tipo_Poblacion":
+#                 "Ocupación":
+#                 "Eps":
+#                 "Direcció":{
+#                     "Tipo_Via":
+#                     "Nombre_Via":
+#                     "Numero_Via":
+#                     },
+#                 }
+                
+#         Persona.insert_one(Nuevo_Registro)

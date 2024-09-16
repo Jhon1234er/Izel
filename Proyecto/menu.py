@@ -5,6 +5,7 @@ import threading
 import time
 
 
+
 # def tiempo():
 #     while True:
 #         ahora=datetime.now().strftime("%H:%M:%S")
@@ -89,7 +90,45 @@ def Menu_Doctor():
     print ("hamilton")
 
 
+def Menu_Auxiliar():
+    while True:
+        print()
+        print(Us,"BIENVENIDO AUXILIAR SOY IZEL, ¿QUE HAREMOS HOY?",Us)
+        print()
+        print("1-Registrar Datos De Usuario ")
+        print("2-Proximamente")
+        print("3-Salir")
+        Aux=int(input())
+        match Aux:
+            case 1:
+                print()
+                print(Us,"REGISTRO DE USUARIOS",Us)
+                Dig=input("Digite El Numero De Documento Del Sujeto a Registrar")
+            case 2:
+                print()
+                print(Us,"PROXIMA ACTUALIZACIÓN",Us)
+            case 3:
+                break
 
+def Menu_Adminitrador():
+    while True:
+        print()
+        print(Us,"BIENVENIDO ADMINISTRADOR SOY IZEL, ¿SOS DIOS?",Us)
+        print()
+        print("1-Registrar Datos De Medicos ")
+        print("2-Proximamente")
+        print("3-Salir")
+        Admin=int(input())
+        match Admin:
+            case 1:
+                print()
+                print(Us,"REGISTRO DE MEDICOS",Us)
+            case 2:
+                print("DIJE PROXIMAMENTE PERRO HP")
+            case 3:
+                pass
+            
+            
 Us= "-"*40
 Imp= " "*40
 Dec= " "*26
@@ -122,17 +161,18 @@ while Inicio != 3:
                         Menu_Usuarios()
                     elif Tipo=="Doctor":
                         Menu_Doctor()
+                    elif Tipo=="Auxiliar":
+                        Menu_Auxiliar()
                         
 
             case 2:
                 print("Regístrate aquí:")
                 correo = input("Correo Electrónico: ")
                 contraseña = input("Contraseña: ")
-                tipo = input("Tipo de Usuario (Usuario/Doctor): ")
-                registrar_usuario(correo, contraseña, tipo)
-                print("Registro exitoso. Ahora puedes iniciar sesión.")
+                tipo = input("Tipo de Usuario (Usuario/Doctor/Auxiliar): ")
+                registrar_Cuenta(correo, contraseña, tipo)
             case 3:
-                print("Gracias por usar IZEL. ¡Hasta luego!")
+                print(Us,"GRACIAS POR PREFERIR IZEL, TU RED MAS CONFIABLE",Us)
                 break
                 
                 

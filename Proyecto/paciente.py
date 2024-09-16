@@ -16,3 +16,6 @@ class Paciente(Persona):
         return self.__regimen
     def setRegimen(self,regimen):
         self.__regimen=regimen
+        
+    def NuevoPaciente (self):
+        pass
