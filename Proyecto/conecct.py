@@ -1,9 +1,11 @@
 from pymongo import errors
+from paciente import Paciente
 import pymongo
 
 
+
 Myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-Mydb = Myclient["Izel"]
+Mydb = Myclient["INFINITY"]
 Autenti = Mydb["Autentificacion"]
 Vacunas = Mydb["Vacunas"]
 Consulta =Mydb["Consulta"]
@@ -13,12 +15,12 @@ Antecedentes = Mydb["Antecedentes"]
 Persona = Mydb["Persona"]
 
 def verificar(Email,Pin):
-        query = {
+        Autentificacion = {
             "Correo":Email,
             "Contraseña":Pin
         }
         
-        usuario=Autenti.find_one(query)
+        usuario=Autenti.find_one(Autentificacion)
         
         if usuario:
             return True
@@ -40,8 +42,8 @@ def registrar_Cuenta(correo, contraseña, tipo):
 
 
 def tipo_usuario(correo):
-        query = {"Correo": correo}
-        usuario = Autenti.find_one(query)
+        Tip= {"Correo": correo}
+        usuario = Autenti.find_one(Tip)
         
         if usuario:
             return usuario.get("Tipo")
@@ -74,35 +76,35 @@ def Datos_Antecedentes(Numero):
     antes = [x for x in resultados]
     return antes
 
-# def Registrar_Usuario(Numero):
-#         if Persona.find_one({"Numero_Documento": Numero}):
-#             print("El usuario ya tiene su registro completo.")
-#             return
-#         else:
-#             Nuevo_Registro = {
-#                 "Nombre":{
-#                     "Nombre1":
-#                     "Nombre2":
-#                     },
-#                 "Apellido":{
-#                     "Apellido1":
-#                     "Apellido2":
-#                     },
-#                 "Genero":
-#                 "Rh":
-#                 "Correo":
-#                 "Teléfono":
-#                 "Tipo_Documento":
-#                 "Numero_Documento":
-#                 "Fecha_Nacimiento":
-#                 "Tipo_Poblacion":
-#                 "Ocupación":
-#                 "Eps":
-#                 "Direcció":{
-#                     "Tipo_Via":
-#                     "Nombre_Via":
-#                     "Numero_Via":
-#                     },
-#                 }
+def Registrar_Usuario(paciente:Paciente):
+        if Persona.find_one({"Numero_Documento": Paciente.getNro_doc()}):
+            print("El usuario ya tiene su registro completo.")
+            return
+        else:
+            Nuevo_Registro = {
+                "Nombre":{
+                    "Nombre1": Paciente.getNombre1(),
+                    "Nombre2": Paciente.getNombre2(),
+                    },
+                "Apellido":{
+                    "Apellido1": Paciente.getApellido1(),
+                    "Apellido2": Paciente.getApellido2(),
+                    },
+                "Genero": Paciente.getGenero(),
+                "Rh": Paciente.getRH(),
+                "Correo": Paciente.getCorreo(),
+                "Teléfono": Paciente.getTelefono(),
+                "Tipo_Documento": Paciente.getTipo_doc(),
+                "Numero_Documento": Paciente.getNro_doc(),
+                "Fecha_Nacimiento": Paciente.getFecha_nacimiento(),
+                "Tipo_Poblacion": Paciente,
+                "Ocupación": Paciente.getOcupacion(),
+                "Eps": Paciente.getEPS(),
+                "Dirección":{
+                    "Tipo_Via": Paciente,
+                    "Nombre_Via": Paciente,
+                    "Numero_Via": Paciente,
+                    },
+                }
                 
-#         Persona.insert_one(Nuevo_Registro)
+        Persona.insert_one(Nuevo_Registro)

@@ -1,9 +1,9 @@
 from datetime import datetime
+from paciente import Paciente
+from registro import *
 from conecct import *
-from registro import*
 import threading
 import time
-
 
 
 # def tiempo():
@@ -89,44 +89,66 @@ def Menu_Usuarios():
 def Menu_Doctor():
     print ("hamilton")
 
-
 def Menu_Auxiliar():
     while True:
         print()
-        print(Us,"BIENVENIDO AUXILIAR SOY IZEL, ¿QUE HAREMOS HOY?",Us)
+        print(Us,"BIENVENIDO AUXILIAR, ¿EN QUE TE AYUDARE HOY?")
         print()
-        print("1-Registrar Datos De Usuario ")
-        print("2-Proximamente")
+        print("1-Registro Datos De Usuario")
+        print("2-")
         print("3-Salir")
         Aux=int(input())
-        match Aux:
+        match Aux :
             case 1:
                 print()
-                print(Us,"REGISTRO DE USUARIOS",Us)
-                Dig=input("Digite El Numero De Documento Del Sujeto a Registrar")
-            case 2:
+                print(Us,"REGISTRO USUARIO",Us)
                 print()
-                print(Us,"PROXIMA ACTUALIZACIÓN",Us)
+                nombres = input("Nombres: ")
+                apellidos = input("Apellidos: ")
+                genero = input("Genero: ")
+                rh = input("RH: ")
+                correo = input("Correo Electrónico: ")
+                telefono = input("Teléfono: ")
+                tipo_doc = input("Tipo de Documento: ")
+                nro_doc = input("Número de Documento: ")
+                fecha_nacimiento = input("Fecha de Nacimiento (AÑO-MES-DIA): ")
+                tipo_poblacion = input("Tipo de Población: ")
+                ocupacion = input("Ocupación: ")
+                eps = input("EPS: ")
+                Dirección = input("Dirección: ")
+                
+                paciente = Paciente(nombres, apellidos, genero, rh, correo, telefono, tipo_doc, nro_doc, fecha_nacimiento, tipo_poblacion, ocupacion, eps, Dirección)
+                
+                Registrar_Usuario(paciente)
+            case 2:
+                pass
             case 3:
-                break
-
-def Menu_Adminitrador():
+                pass
+            
+def Menu_Administrador():
     while True:
         print()
-        print(Us,"BIENVENIDO ADMINISTRADOR SOY IZEL, ¿SOS DIOS?",Us)
+        print(Us,"BIENVENIDO SOY IZEL, ¿ERES DIOS?")
         print()
-        print("1-Registrar Datos De Medicos ")
-        print("2-Proximamente")
-        print("3-Salir")
+        print("1-Registrar Turnos")
+        print("2-Ver Departamentos")
+        print("3-Registrar a Medicos")
+        print("4-Registrar Auxiliares")
+        print("5-Salir")
         Admin=int(input())
         match Admin:
             case 1:
-                print()
-                print(Us,"REGISTRO DE MEDICOS",Us)
+                pass
             case 2:
-                print("DIJE PROXIMAMENTE PERRO HP")
+                pass
             case 3:
                 pass
+            case 4:
+                pass
+            case 5:
+                pass
+            
+            
             
             
 Us= "-"*40
@@ -163,16 +185,18 @@ while Inicio != 3:
                         Menu_Doctor()
                     elif Tipo=="Auxiliar":
                         Menu_Auxiliar()
-                        
+                    elif Tipo=="Administrador":
+                        Menu_Administrador()
 
-            case 2:
+            case 2: 
                 print("Regístrate aquí:")
                 correo = input("Correo Electrónico: ")
                 contraseña = input("Contraseña: ")
-                tipo = input("Tipo de Usuario (Usuario/Doctor/Auxiliar): ")
+                tipo = input("Tipo de Usuario (Usuario/Doctor): ")
                 registrar_Cuenta(correo, contraseña, tipo)
+                print(Us,"Registro exitoso. Ahora puedes iniciar sesión.",Us)
             case 3:
-                print(Us,"GRACIAS POR PREFERIR IZEL, TU RED MAS CONFIABLE",Us)
+                print(Us,"Gracias por usar IZEL",Us)
                 break
                 
                 
