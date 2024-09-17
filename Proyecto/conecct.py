@@ -1,14 +1,15 @@
 from pymongo import errors
 import pymongo
+from medico import *
 
 
 Myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 Mydb = Myclient["Izel"]
 Autenti = Mydb["Autentificacion"]
 Vacunas = Mydb["Vacunas"]
-Consulta =Mydb["Consulta"]
+ConsultaDB =Mydb["Consulta"]
 Quirurgico = Mydb["Quirurgicos"]
-Antropo = Mydb["Antropometricos"]
+AntropoDB = Mydb["Antropometricos"]
 Antecedentes = Mydb["Antecedentes"]
 Formula= Mydb ["FormulaMedica"]
 
@@ -75,41 +76,42 @@ def Datos_Antecedentes(Numero):
     antes = [x for x in resultados]
     return antes
 
-def agregarDatosConsulta(Numero,descripcion,motivo,diagnostico,planTerapeutico,epicrisis,nombreAcompañante,parentescoAcompañante,conclusiones):
+def agregarDatosConsulta(nro_doc,p):
     nuevaConsulta={
-         "Usuario_id":Numero,
-         "Descripcion_Enfermedad":descripcion,
-         "Motivo_Consulta":motivo,
-         "Diagnostico":diagnostico,
-         "Plan_Terapeutico":planTerapeutico,
-         "Epicrisis":epicrisis,
-         "Nombre_Acompañante":nombreAcompañante,
-         "Parentesco_Acompañante":parentescoAcompañante,
-         "Conclusiones":conclusiones
+         "Usuario_id":nro_doc,
+         "Descripcion_Enfermedad":p.getDescripcion(),
+         "Motivo_Consulta":p.getMotivo(),
+         "Diagnostico":p.getDiagnostico(),
+         "Plan_Terapeutico":p.getPlanTerapia(),
+         "Epicrisis":p.getEpicrisis(),
+         "Nombre_Acompañante":p.getNombre_A(),
+         "Parentesco_Acompañante":p.getParentesco_A(),
+         "Conclusiones":p.getConclusiones()
     }
-    Consulta.insert_one(nuevaConsulta)
+    ConsultaDB.insert_one(nuevaConsulta)
 
-def agregarDatosATP(Numero,peso,talla,imc,temperatura,pulso,frecuencia_R,presion_A):
+def agregarDatosATP(nro_doc,p):
     nuevoDatosATP={
-          'Usuario_id': Numero,
-          'Peso': peso,
-          'Talla': talla,
-          'IMS': imc,
-          'Temperatura': temperatura,
-          'Pulso': pulso,
-          'Frecuencia_Respiratoria': frecuencia_R,
-          'Presion_Arterial': presion_A
+          'Usuario_id':nro_doc,
+          'Peso': p.getPeso(),
+          'Talla': p.getTalla(),
+          'IMS': p.getIMC(),
+          'Temperatura':p.getTemperatura() ,
+          'Pulso': p.getPulso(),
+          'Frecuencia_Respiratoria':p.getFrecuencia_R(),
+          'Presion_Arterial':p.getPresion_A()
      }
-    Antropo.insert_one(nuevoDatosATP)
+    AntropoDB.insert_one(nuevoDatosATP)
 
-def agregarFormula(codigo_F,cantidad,duracion,concentracion,medicamento,indicaciones,via_Administracion):
+def agregarFormula(nro_doc,p):
     nuevaFormula={
-         "CodigoFormula":codigo_F,
-         "NombreMedicamento":medicamento,
-         "CantidadMedicamento":cantidad,
-         "DuracionMedicamento":duracion,
-         "Concentracion":concentracion,
-         "Indicaciones":indicaciones,
-         "ViaAdministracion":via_Administracion
+         'Usuario_id':nro_doc,
+         "CodigoFormula":p.getCodigoF(),
+         "NombreMedicamento":p.getMedicamento(),
+         "CantidadMedicamento":p.getCantidad(),
+         "DuracionMedicamento":p.getDuracion(),
+         "Concentracion":p.getConcentracion(),
+         "Indicaciones":p.getIndicaciones(),
+         "ViaAdministracion":p.getViaAdministracion()
     }
     Formula.insert_one(nuevaFormula)

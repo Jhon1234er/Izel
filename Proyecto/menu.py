@@ -1,9 +1,8 @@
 from datetime import datetime
 from conecct import *
-from registro import*
 import threading
 import time
-
+from medico import *
 
 # def tiempo():
 #     while True:
@@ -96,7 +95,7 @@ def Menu_Doctor():
         while True:
             match opcionP:
                 case 1:
-                    Numero =input('Ingrese el numero de documento del paciente: ')
+                    nro_doc =input('Ingrese el numero de documento del paciente: ')
                     print('1. Visualizar perfil del paciente')
                     print('2. Visualizar antecedentes del paciente')
                     print('3. Visualizar datos antropologicos')
@@ -106,11 +105,10 @@ def Menu_Doctor():
                     print('7. Agregar datos antropologicos a la consulta')
                     print('8. Ordenar una formula medica')
                     elecionConsulta=int(input('¿Que desea realizar?: '))
-                    while True:
-                        match elecionConsulta:
-                            case 1:
-                                pass
-                            case 2:
+                    match elecionConsulta:
+                        case 1:
+                            pass
+                        case 2:
                                 personales = Datos_Antecedentes(Numero)
                                 if personales:
                                     print(Us, "Antecedentes personales del paciente")
@@ -118,7 +116,7 @@ def Menu_Doctor():
                                         print(personal)
                                 else :
                                     print("NO SIRVO")
-                            case 3:
+                        case 3:
                                 antro = Datos_Antropometricos(Numero)
                                 if antro:
                                     print(Us, "Datos antropometricos del paciente")
@@ -126,7 +124,7 @@ def Menu_Doctor():
                                         print(antropo)
                                 else:
                                     print("NO SIRVO")
-                            case 4:
+                        case 4:
                                 proceso = Datos_Quirurgico(Numero)
                                 if proceso:
                                     print(Us, "Procesos quirurjicos del paciente")
@@ -134,7 +132,7 @@ def Menu_Doctor():
                                         print(procesos)
                                 else :
                                     print("NO SIRVO")
-                            case 5:                     
+                        case 5:                     
                                 vacunas = Datos_Vacunas(Numero)
                                 if vacunas:
                                     print(Us, "Historial de vacunas del paciente")
@@ -142,57 +140,62 @@ def Menu_Doctor():
                                         print(vacuna)
                                     else :
                                         print("NO SIRVO")
-                            case 6:
-                                print()
-                                print(Us,'Agregar datos de la consulta',Us)
-                                print()
-                                descripcion=input('Ingrese la descripcion de la enfermedad: ')
-                                motivo=input('Motivo de la consulta: ')
-                                diagnostico=input('Diagnostico: ')
-                                planTerapeutico=input('Plan terapeutico: ')
-                                epicrisis=input('Epicrisis: ')
-                                nombreAcompañante=input('Nombre del acompañante (si aplica): ')
-                                parentescoAcompañante=input('Parentesco acompañante si aplica: ')
-                                conclusiones=input('Conclusiones de la consulta: ')
-                                try:
-                                    agregarDatosConsulta(Numero,descripcion,motivo,diagnostico,planTerapeutico,epicrisis,nombreAcompañante,parentescoAcompañante,conclusiones)
-                                    print('Exitoso')
-                                except:
-                                    print('Error al guardar la consulta')
+                        case 6:
+                            print()
+                            print(Us,'Agregar datos de la consulta',Us)
+                            print()
+                            descripcion_E=input('Ingrese la descripcion de la enfermedad: ')
+                            motivo_C=input('Motivo de la consulta: ')
+                            diagnostico=input('Diagnostico: ')
+                            plan_Terap=input('Plan terapeutico: ')
+                            epicrisis=input('Epicrisis: ')                                
+                            nombre_A=input('Nombre del acompañante (si aplica): ')
+                            parentesco_A=input('Parentesco acompañante si aplica: ')
+                            conclusiones=input('Conclusiones de la consulta: ')
+                        
+                            try:
+                                consultaInsert= Consulta(descripcion_E,motivo_C,diagnostico,plan_Terap,epicrisis,nombre_A,parentesco_A,conclusiones)
+                                agregarDatosConsulta(nro_doc,consultaInsert)
+                                print('Exitoso')
+                            except Exception as e:
+                                print('Error al guardar la consulta',e)
 
                             
-                            case 7:
-                                print()
-                                print(Us,'Agregar datos antropologicos de la consulta',Us)
-                                print()
-                                peso=input('Peso del paciente: ')
-                                talla=input('Talla del paciente: ')
-                                temperatura=input('Temperatura del paciente: ')
-                                imc=input('IMC del paciente: ')
-                                pulso=input('Pluso del paciente: ')
-                                frecuencia_R=input('Frecuencia respiratoria del paciente: ')
-                                presion_A=input('Presion arterial del paciente: ')
-                                try:
-                                    agregarDatosATP(talla,temperatura,imc,pulso,peso,frecuencia_R,presion_A)
-                                    print('Exitoso')
-                                except:
-                                    print('Error al insertar los datos')
-                            case 8:
-                                print()
-                                print(Us,'Formula Médica',Us)
-                                print()
-                                codigo_F=input('Codigo formula: ')
-                                medicamento=input('Nombre del medicamento: ')
-                                cantidad=input('Cantidad de la medicacion: ')
-                                duracion=input('Duracion del tratamiento: ')
-                                concentracion=input('Concentracion del medicamento: ')
-                                indicaciones=input('Indicaciones del tratamiento: ')
-                                via_Administracion=input('Via de administracion del tratamiento: ')
-                                try:
-                                    agregarFormula(codigo_F,cantidad,duracion,concentracion,medicamento,indicaciones,via_Administracion)
-                                    print('Exitoso')
-                                except:
-                                    print('Error al generar la formula')
+                        case 7:
+                            print()
+                            print(Us,'Agregar datos antropologicos de la consulta',Us)
+                            print()
+                            peso=input('Peso del paciente: ')
+                            talla=input('Talla del paciente: ')
+                            imc=input('IMC del paciente: ')
+                            temperatura=input('Temperatura del paciente: ')
+                            pulso=input('Pluso del paciente: ')
+                            frecuencia_R=input('Frecuencia respiratoria del paciente: ')
+                            presion_A=input('Presion arterial del paciente: ')
+                            try:
+                                datosATPInsert=antropometricos(talla,temperatura,imc,pulso, peso, frecuencia_R, presion_A)
+                                agregarDatosATP(nro_doc,datosATPInsert)
+                                print('Exitoso')
+                            except:
+                                print('Error al insertar los datos')
+                        case 8:
+                            print()
+                            print(Us,'Formula Médica',Us)
+                            print()
+                            codigo_F=input('Codigo formula: ')
+                            medicamento=input('Nombre del medicamento: ')
+                            cantidad=input('Cantidad de la medicacion: ')
+                            duracion=input('Duracion del tratamiento: ')
+                            concentracion=input('Concentracion del medicamento: ')
+                            indicaciones=input('Indicaciones del tratamiento: ')
+                            via_Administracion=input('Via de administracion del tratamiento: ') 
+
+                            formulaInsert= FormulaMedica(codigo_F,cantidad,duracion,concentracion,medicamento,indicaciones,via_Administracion)
+                            agregarFormula(nro_doc,formulaInsert)
+                            try: 
+                                print('Exitoso')
+                            except:
+                                print('Error al generar la formula')
                                                 
                 case 2:
                     print('1. Gestionar consultorio')

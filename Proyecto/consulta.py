@@ -1,6 +1,6 @@
-class consulta:
+class Consulta:
     def __init__(self, descripcion_E, motivo_C, diagnostico, plan_Terap,
-                 epicrisis, nombre_A, parentesco_A, consulciones):
+                 epicrisis, nombre_A, parentesco_A, conclusiones):
         self.__Descripcion = descripcion_E
         self.__Motivo = motivo_C
         self.__Diagnostico = diagnostico
@@ -8,7 +8,9 @@ class consulta:
         self.__Epicrisis = epicrisis
         self.__Nombre_A = nombre_A
         self.__Parentesco_A = parentesco_A
-        self.__Consultas = consulciones
+        self.__Conclusiones = conclusiones
+    def getNumero(self):
+        return self.__Numero
     
     def getDescripcion(self):
         return self.__Descripcion
@@ -52,9 +54,8 @@ class consulta:
     def setParentesco_A(self, parentesco_A):
         self.__Parentesco_A = parentesco_A
     
-    def getConsultas(self):
-        return self.__Consultas
+    def getConclusiones(self):
+        return self.__Conclusiones
     
-    def setConsultas(self, consulciones):
-        self.__Consultas = consulciones
-        
+    def setConclusiones(self, conclusiones):
+        self.__Conclusiones = conclusiones

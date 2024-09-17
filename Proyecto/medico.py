@@ -1,4 +1,7 @@
 from persona import *
+from consulta import *
+from datosATP import *
+from formula import *
 
 class Medico(Persona):
     def __init__(self, nombres, apellidos, genero, rh, correo, telefono, tipo_doc, nro_doc, fecha_nacimiento, tipo_poblacion, ocupacion,cod_medico,especialidad):

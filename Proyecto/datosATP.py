@@ -1,10 +1,10 @@
 class antropometricos:
-    def __init__(self, talla,temperatura,imc,pluso, peso, frecuencia_R, presion_A):
+    def __init__(self, talla,temperatura,imc,pulso, peso, frecuencia_R, presion_A):
         self.__Peso = peso
         self.__Temperatura = temperatura
         self.__Talla = talla
-        self.__IMC = imc
-        self.__Pluso = pluso
+        self.__Imc = imc
+        self.__Pulso = pulso
         self.__Frecuencia_R = frecuencia_R
         self.__Presion_A = presion_A
     
@@ -27,16 +27,16 @@ class antropometricos:
         self.__Talla = talla
     
     def getIMC(self):
-        return self.__IMC
+        return self.__Imc
     
-    def setIMC(self, IMC):
-        self.__IMC = IMC
+    def setIMC(self, imc):
+        self.__Imc = imc
         
-    def getPluso(self):
-        return self.__Pluso
+    def getPulso(self):
+        return self.__Pulso
     
-    def setPluso(self, pluso):
-        self.__Pluso = pluso
+    def setPulso(self, pulso):
+        self.__Pulso = pulso
     
     def getFrecuencia_R(self):
         return self.__Frecuencia_R
