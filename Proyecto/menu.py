@@ -1,6 +1,5 @@
 from datetime import datetime
-from paciente import Paciente
-from registro import *
+from paciente import *
 from conecct import *
 import threading
 import time
@@ -95,7 +94,7 @@ def Menu_Auxiliar():
         print(Us,"BIENVENIDO AUXILIAR, ¿EN QUE TE AYUDARE HOY?")
         print()
         print("1-Registro Datos De Usuario")
-        print("2-")
+        print("2-PROXIMAMENTE")
         print("3-Salir")
         Aux=int(input())
         match Aux :
@@ -121,9 +120,11 @@ def Menu_Auxiliar():
                 
                 Registrar_Usuario(paciente)
             case 2:
-                pass
+                print("OYE DEJAME TRABAJAR ESPERATE HASTA LA PROXIMA ACTUALIZACIÓN!!! ATT: IZEL")
             case 3:
-                pass
+                print(Us,"HOY FUE UN DIA CANSADO, NOS VEMOS MAÑANA :) ",Us)
+                break
+            
             
 def Menu_Administrador():
     while True:
@@ -138,15 +139,33 @@ def Menu_Administrador():
         Admin=int(input())
         match Admin:
             case 1:
-                pass
+                print()
+                print("MENU TURNOS")
+                print()
             case 2:
-                pass
+                print()
+                print("MIRE JEFE LOS DEPARTEMENTOS ACTIVOS")
+                print()
+                print("1-ODONTOLOGIA")
+                print("2-PEDIATRIA")
+                print("3-DERMATOLOGIA")
+                print("4-ORTOPEDIA")
+                print("5-CIRUGIA")
+                print("6-GINECOLOGIA")
+                print("7-ORTOPEDIA Y TRAUMATOLOGIA")
+                print("8-PSIQUIATRIA Y SALUD MENTAL")
+                print("9-RADIOLOGIA")
             case 3:
-                pass
+                print()
+                print("REGISTRO DE CUENTAS MEDICAS")
+                print()
             case 4:
-                pass
+                print()
+                print("REGISTRO DE CUENTAS AUXILIARES")
+                print() 
             case 5:
-                pass
+                print("HASTA LA VISTA BEIBI >:c ")
+                break
             
             
             

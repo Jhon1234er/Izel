@@ -1,18 +1,17 @@
 from pymongo import errors
-from paciente import Paciente
+from paciente import *
 import pymongo
 
 
-
 Myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-Mydb = Myclient["INFINITY"]
+Mydb = Myclient["Izel"]
 Autenti = Mydb["Autentificacion"]
 Vacunas = Mydb["Vacunas"]
 Consulta =Mydb["Consulta"]
 Quirurgico = Mydb["Quirurgicos"]
 Antropo = Mydb["Antropometricos"]
 Antecedentes = Mydb["Antecedentes"]
-Persona = Mydb["Persona"]
+PersonaDB = Mydb["Persona"]
 
 def verificar(Email,Pin):
         Autentificacion = {
@@ -75,36 +74,30 @@ def Datos_Antecedentes(Numero):
     resultados = Antecedentes.find({"Usuario_id": Numero})
     antes = [x for x in resultados]
     return antes
+   
 
-def Registrar_Usuario(paciente:Paciente):
-        if Persona.find_one({"Numero_Documento": Paciente.getNro_doc()}):
-            print("El usuario ya tiene su registro completo.")
-            return
-        else:
-            Nuevo_Registro = {
-                "Nombre":{
-                    "Nombre1": Paciente.getNombre1(),
-                    "Nombre2": Paciente.getNombre2(),
-                    },
-                "Apellido":{
-                    "Apellido1": Paciente.getApellido1(),
-                    "Apellido2": Paciente.getApellido2(),
-                    },
-                "Genero": Paciente.getGenero(),
-                "Rh": Paciente.getRH(),
-                "Correo": Paciente.getCorreo(),
-                "Teléfono": Paciente.getTelefono(),
-                "Tipo_Documento": Paciente.getTipo_doc(),
-                "Numero_Documento": Paciente.getNro_doc(),
-                "Fecha_Nacimiento": Paciente.getFecha_nacimiento(),
-                "Tipo_Poblacion": Paciente,
-                "Ocupación": Paciente.getOcupacion(),
-                "Eps": Paciente.getEPS(),
-                "Dirección":{
-                    "Tipo_Via": Paciente,
-                    "Nombre_Via": Paciente,
-                    "Numero_Via": Paciente,
-                    },
-                }
+
+
+def Registrar_Usuario(p):
+    
+    if PersonaDB.find_one({"Numero_Documento": p.getNumeroDoc()}):
+        print("El usuario ya tiene su registro completo.")
+        return
+    else:
+        Nuevo_Registro = {
+            "Nombre":p.getNombres(),
+            "Apellido":p.getApellidos(),
+            "Genero": p.getGenero(),
+            "Rh": p.getRh(),
+            "Correo": p.getCorreo(),
+            "Teléfono": p.getTelefono(),
+            "Tipo_Documento": p.getTipoDoc(),
+            "Numero_Documento": p.getNumeroDoc(),
+            "Fecha_Nacimiento": p.getFechaNacimiento(),
+            "Tipo_Poblacion": p.getTipoPoblacion(),
+            "Ocupación": p.getOcupacion(),
+            "Eps": p.getEPS(),
+            "Dirección": p.getDirección()
+            }
                 
-        Persona.insert_one(Nuevo_Registro)
+        PersonaDB.insert_one(Nuevo_Registro)
