@@ -111,7 +111,7 @@ def Menu_Doctor():
                         case 1:
                             pass
                         case 2:
-                                personales = Datos_Antecedentes(Numero)
+                                personales = Datos_Antecedentes(nro_doc)
                                 if personales:
                                     print(Us, "Antecedentes personales del paciente")
                                     for personal in personales:
@@ -119,7 +119,7 @@ def Menu_Doctor():
                                 else :
                                     print("NO SIRVO")
                         case 3:
-                                antro = Datos_Antropometricos(Numero)
+                                antro = Datos_Antropometricos(nro_doc)
                                 if antro:
                                     print(Us, "Datos antropometricos del paciente")
                                     for antropo in antro:
@@ -127,7 +127,7 @@ def Menu_Doctor():
                                 else:
                                     print("NO SIRVO")
                         case 4:
-                                proceso = Datos_Quirurgico(Numero)
+                                proceso = Datos_Quirurgico(nro_doc)
                                 if proceso:
                                     print(Us, "Procesos quirurjicos del paciente")
                                     for procesos in proceso:
@@ -135,7 +135,7 @@ def Menu_Doctor():
                                 else :
                                     print("NO SIRVO")
                         case 5:                     
-                                vacunas = Datos_Vacunas(Numero)
+                                vacunas = Datos_Vacunas(nro_doc)
                                 if vacunas:
                                     print(Us, "Historial de vacunas del paciente")
                                     for vacuna in vacunas:
