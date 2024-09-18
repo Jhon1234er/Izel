@@ -7,7 +7,7 @@ class Ips:
         self.__categorizacion=categorizacion
         self.__telefono=telefono
         self.__direccion=direccion
-        self.__redes=redes
+        self.__rede=redes
     
     def getcodSggs(self):
         return self.__codSggs
@@ -45,6 +45,7 @@ class Ips:
         self.__direccion=direccion
 
     def getRedes(self):
-        return self.__redes
+        return self.__rede
     def setRedes(self,redes):
-        self.__redes=redes
+        self.__rede=redes
+        

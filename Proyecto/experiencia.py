@@ -46,5 +46,5 @@ class Experiencia_Laboral:
         
     def getFechaFinal(self):
         return self.__fechaFinal
-    def setFechaFinal(self,fechaFinal):
-        self.__=fechaFinal
+
+

@@ -1,5 +1,6 @@
-from pymongo import errors
+from pymongo import *
 from paciente import *
+from Empleados import *
 import pymongo
 
 
@@ -12,6 +13,7 @@ Quirurgico = Mydb["Quirurgicos"]
 Antropo = Mydb["Antropometricos"]
 Antecedentes = Mydb["Antecedentes"]
 PersonaDB = Mydb["Persona"]
+EmpleadoDB= Mydb ["Empleados"]
 
 def verificar(Email,Pin):
         Autentificacion = {
@@ -85,8 +87,14 @@ def Registrar_Usuario(p):
         return
     else:
         Nuevo_Registro = {
-            "Nombre":p.getNombres(),
-            "Apellido":p.getApellidos(),
+            "Nombre":{
+                "Nombre1":p.getNombre1(),
+                "Nombre2":p.getNombre2(),
+            },
+            "Apellido":{
+                "Apellido1":p.getApellido1(),                              
+                "Apellido2":p.getApellido2(),
+            },
             "Genero": p.getGenero(),
             "Rh": p.getRh(),
             "Correo": p.getCorreo(),
@@ -101,3 +109,20 @@ def Registrar_Usuario(p):
             }
                 
         PersonaDB.insert_one(Nuevo_Registro)
+        print("LLENADO DE DATOS EXITOSO")
+        
+def Registrar_Contrato (c):
+    if EmpleadoDB.find_one({"Empleado_id": c.getID()}):
+        print("ESTE EMPLEADO YA EXISTE ")
+        return
+    else:
+        Nuevo_contrato={
+            "Empleado_id":c.getID(),
+            "Fecha_Contratacion":c.getFecha_Contratacion(),
+            "Posicion_Id":c.getPosicion(),
+            "Persona_Id":c.getNumeroDoc()
+        }
+    
+    EmpleadoDB.insert_one(Nuevo_contrato)
+    print("CONTRATO REGISTRADO")
+    

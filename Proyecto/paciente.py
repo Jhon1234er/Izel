@@ -1,13 +1,15 @@
 from persona import *
 
 class Paciente(Persona):
-    def __init__(self, nombres, apellidos, genero, rh, correo, telefono, tipo_doc, nro_doc, fecha_nacimiento, tipo_poblacion, ocupacion, eps,direccion):
-        super().__init__(nombres, apellidos, genero, rh, correo, telefono, tipo_doc, nro_doc, fecha_nacimiento, tipo_poblacion, ocupacion)
+    def __init__(self, nombre1, nombre2, apellido1, apellido2, genero, rh, correo, telefono, tipo_doc, nro_doc, fecha_nacimiento, tipo_poblacion, ocupacion, eps,direccion):
+        super().__init__(nombre1, apellido1, genero, rh, correo, telefono, tipo_doc, nro_doc, fecha_nacimiento, tipo_poblacion, ocupacion)
         self.__eps=eps
         self.__Dirección=direccion
         self.__nro_doc = nro_doc 
-        self.__nombres= nombres
-        self.__apellidos= apellidos
+        self.__Primer_N= nombre1
+        self.__Segundo_N=nombre2
+        self.__Primer_A= apellido1
+        self.__Segundo_A=apellido2
         self.__genero= genero
         self.__rh= rh
         self.__correo= correo
@@ -18,17 +20,17 @@ class Paciente(Persona):
         self.__ocupacion= ocupacion
         self.__eps=eps
         
-    def getNombres(self):
-        return self.__nombres.split()[0] 
+    def getNombre1(self):
+        return self.__Primer_N 
 
-    # def getNombre2(self):
-    #     return self.__nombres.split()[1] if len(self.nombres.split()) > 1 else None
+    def getNombre2(self):
+         return self.__Segundo_N
     
-    def getApellidos(self):
-        return self.__apellidos.split()[0] 
+    def getApellido1(self):
+        return self.__Primer_A 
 
-    # def getApellido2(self):
-    #     return self.__apellidos.split()[1] if len(self.apellidos.split()) > 1 else None
+    def getApellido2(self):
+         return self.__Segundo_A
     
     def getGenero(self):
         return self.__genero

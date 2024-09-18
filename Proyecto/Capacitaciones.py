@@ -9,5 +9,18 @@ class Capacitaciones(Empleados):
         self.__Fecha=Fecha
         self.__Empleado=Empleado_id
     
+    def getid (self):
+        return self.__id
     
+    def getTitulo (self):
+        return self.__Titulo
+    
+    def getDescripcion (self):
+        return self.__Descripcion
+    
+    def getFecha (self):
+        return self.__Fecha
+    
+    def getEmpleado (self):
+        return self.__Empleado
     

@@ -22,8 +22,6 @@ class Estudios:
 
     def getFechaFinEstudios(self):
         return self.__fechaFinEstudios
-    def setFechaFinEstudios(self,fechaFinEstudios):
-        self.__=fechaFinEstudios
 
 
 
