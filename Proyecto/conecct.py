@@ -14,6 +14,8 @@ Quirurgico = Mydb["Quirurgicos"]
 AntropoDB = Mydb["Antropometricos"]
 Antecedentes = Mydb["Antecedentes"]
 Formula= Mydb ["FormulaMedica"]
+PersonaDB= Mydb ['Personas']
+EmpleadoDB= Mydb ['Empleados']
 
 def verificar(Email,Pin):
         Autentificacion = {
@@ -68,7 +70,7 @@ def Datos_Quirurgico (Numero):
     return quirur 
 
 def Datos_Antropometricos(Numero):
-    resultados = Antropo.find({"Usuario_id": Numero})
+    resultados = AntropoDB.find({"Usuario_id": Numero})
     date = [x for x in resultados]
     return date
 
