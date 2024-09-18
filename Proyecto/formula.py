@@ -1,4 +1,4 @@
-class medica:
+class FormulaMedica:
     def __init__(self, codigo_F, cantidad, duracion, concentracion, medicamento, indicaciones, via_Administracion):
         self.__CodigoF = codigo_F
         self.__Cantidad = cantidad

@@ -2,18 +2,18 @@ from pymongo import *
 from paciente import *
 from Empleados import *
 import pymongo
+from medico import *
 
 
 Myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 Mydb = Myclient["Izel"]
 Autenti = Mydb["Autentificacion"]
 Vacunas = Mydb["Vacunas"]
-Consulta =Mydb["Consulta"]
+ConsultaDB =Mydb["Consulta"]
 Quirurgico = Mydb["Quirurgicos"]
-Antropo = Mydb["Antropometricos"]
+AntropoDB = Mydb["Antropometricos"]
 Antecedentes = Mydb["Antecedentes"]
-PersonaDB = Mydb["Persona"]
-EmpleadoDB= Mydb ["Empleados"]
+Formula= Mydb ["FormulaMedica"]
 
 def verificar(Email,Pin):
         Autentificacion = {
@@ -126,3 +126,42 @@ def Registrar_Contrato (c):
     EmpleadoDB.insert_one(Nuevo_contrato)
     print("CONTRATO REGISTRADO")
     
+def agregarDatosConsulta(nro_doc,p):
+    nuevaConsulta={
+         "Usuario_id":nro_doc,
+         "Descripcion_Enfermedad":p.getDescripcion(),
+         "Motivo_Consulta":p.getMotivo(),
+         "Diagnostico":p.getDiagnostico(),
+         "Plan_Terapeutico":p.getPlanTerapia(),
+         "Epicrisis":p.getEpicrisis(),
+         "Nombre_Acompañante":p.getNombre_A(),
+         "Parentesco_Acompañante":p.getParentesco_A(),
+         "Conclusiones":p.getConclusiones()
+    }
+    ConsultaDB.insert_one(nuevaConsulta)
+
+def agregarDatosATP(nro_doc,p):
+    nuevoDatosATP={
+          'Usuario_id':nro_doc,
+          'Peso': p.getPeso(),
+          'Talla': p.getTalla(),
+          'IMS': p.getIMC(),
+          'Temperatura':p.getTemperatura() ,
+          'Pulso': p.getPulso(),
+          'Frecuencia_Respiratoria':p.getFrecuencia_R(),
+          'Presion_Arterial':p.getPresion_A()
+     }
+    AntropoDB.insert_one(nuevoDatosATP)
+
+def agregarFormula(nro_doc,p):
+    nuevaFormula={
+         'Usuario_id':nro_doc,
+         "CodigoFormula":p.getCodigoF(),
+         "NombreMedicamento":p.getMedicamento(),
+         "CantidadMedicamento":p.getCantidad(),
+         "DuracionMedicamento":p.getDuracion(),
+         "Concentracion":p.getConcentracion(),
+         "Indicaciones":p.getIndicaciones(),
+         "ViaAdministracion":p.getViaAdministracion()
+    }
+    Formula.insert_one(nuevaFormula)

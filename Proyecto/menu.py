@@ -3,7 +3,7 @@ from paciente import *
 from conecct import *
 import threading
 import time
-
+from medico import *
 
 # def tiempo():
 #     while True:
@@ -87,7 +87,80 @@ def Menu_Usuarios():
                     break
 
 def Menu_Doctor():
-    print ("hamilton")
+    print ("Hamilton")
+    while True:
+        print('Bienvenido a IZEL doctor, ¿En que trabajaremos hoy?')
+        print('1. Ingresar a consulta')
+        print('2. Gestionar mi consultorio')
+        print('3. Cerrar Sesion')
+        opcionP=int(input('¿Que accion desea consultar?: '))
+        while True:
+            match opcionP:
+                case 1:
+                    nro_doc =input('Ingrese el numero de documento del paciente: ')
+                    print('1. Visualizar perfil del paciente')
+                    print('2. Visualizar antecedentes del paciente')
+                    print('3. Visualizar datos antropologicos')
+                    print('4. Visualizar procesos quirurjicos')
+                    print('5. Visualizaar historial de vacunacion')
+                    print('6. Agregar datos a la consulta')
+                    print('7. Agregar datos antropologicos a la consulta')
+                    print('8. Ordenar una formula medica')
+                    elecionConsulta=int(input('¿Que desea realizar?: '))
+                    match elecionConsulta:
+                        case 1:
+                            pass
+                        case 2:
+                                personales = Datos_Antecedentes(Numero)
+                                if personales:
+                                    print(Us, "Antecedentes personales del paciente")
+                                    for personal in personales:
+                                        print(personal)
+                                else :
+                                    print("NO SIRVO")
+                        case 3:
+                                antro = Datos_Antropometricos(Numero)
+                                if antro:
+                                    print(Us, "Datos antropometricos del paciente")
+                                    for antropo in antro:
+                                        print(antropo)
+                                else:
+                                    print("NO SIRVO")
+                        case 4:
+                                proceso = Datos_Quirurgico(Numero)
+                                if proceso:
+                                    print(Us, "Procesos quirurjicos del paciente")
+                                    for procesos in proceso:
+                                        print(procesos)
+                                else :
+                                    print("NO SIRVO")
+                        case 5:                     
+                                vacunas = Datos_Vacunas(Numero)
+                                if vacunas:
+                                    print(Us, "Historial de vacunas del paciente")
+                                    for vacuna in vacunas:
+                                        print(vacuna)
+                                    else :
+                                        print("NO SIRVO")
+                        case 6:
+                            print()
+                            print(Us,'Agregar datos de la consulta',Us)
+                            print()
+                            descripcion_E=input('Ingrese la descripcion de la enfermedad: ')
+                            motivo_C=input('Motivo de la consulta: ')
+                            diagnostico=input('Diagnostico: ')
+                            plan_Terap=input('Plan terapeutico: ')
+                            epicrisis=input('Epicrisis: ')                                
+                            nombre_A=input('Nombre del acompañante (si aplica): ')
+                            parentesco_A=input('Parentesco acompañante si aplica: ')
+                            conclusiones=input('Conclusiones de la consulta: ')
+                        
+                            try:
+                                consultaInsert= Consulta(descripcion_E,motivo_C,diagnostico,plan_Terap,epicrisis,nombre_A,parentesco_A,conclusiones)
+                                agregarDatosConsulta(nro_doc,consultaInsert)
+                                print('Exitoso')
+                            except Exception as e:
+                                print('Error al guardar la consulta',e)
 
 def Menu_Auxiliar():
     while True:
