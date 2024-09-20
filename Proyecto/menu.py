@@ -11,9 +11,9 @@ def Menu_Usuarios():
             print()
             print(Us,"HOLA USUARIO SOY IZEL!",Us)
             print()
-            print("VER DATOS DEL PREFIL")
-            print("VER HISTORIAL CLINICO")
-            print("CERRAR SESION")
+            print("1- VER DATOS DEL PREFIL")
+            print("2- VER HISTORIAL CLINICO")
+            print("3- CERRAR SESION")
             ELEGIDO=int(input())
             match ELEGIDO:
                 case 1:
@@ -22,16 +22,16 @@ def Menu_Usuarios():
                         print(Us,"PERFIL",Us)
                         print(perfil)
                     else:
-                        print("Fallo")
+                        print(Us,"Perdon no pude encontrar lo que pedias",Us)
                 case 2:
                     print()
                     print(Us,"¿QUE RESULTADO DESEA SABER?",Us)
                     print()
-                    print("1. Mis Vacunas")
-                    print("2. Mis Consultas")
-                    print("3. Resultados Quirurgicos")
-                    print("4. Ver Mis Datos Antropometricos")
-                    print("5. Ver Mis Antecedentes Personales")
+                    print("1- Mis Vacunas")
+                    print("2- Mis Consultas")
+                    print("3- Resultados Quirurgicos")
+                    print("4- Ver Mis Datos Antropometricos")
+                    print("5- Ver Mis Antecedentes Personales")
                     print("VOLVER")
                     RESULTADOS=int(input())
                     match RESULTADOS:
@@ -39,48 +39,48 @@ def Menu_Usuarios():
                             Numero = input("DIGITE SU NUMERO DE DOCUMENTO: ")
                             vacunas = Datos_Vacunas(Numero)
                             if vacunas:
-                                print(Us, "MIS VACUNAS")
+                                print(Us,"MIS VACUNAS",Us)
                                 for vacuna in vacunas:
                                     print(vacuna)
                             else :
-                                print("NO SIRVO")  
+                                print(Us,"Perdon no pude encontrar lo que pedias",Us)  
                         case 2:
                             Numero = input("DIGITE SU NUMERO DE DOCUMENTO: ")
                             consulta = Datos_Consulta(Numero)
                             if consulta:
-                                print(Us, "MIS CONSULTAS")
+                                print(Us,"MIS CONSULTAS",Us)
                                 for consultas in consulta:
                                     print(consultas)
                             else :
-                                print("NO SIRVO")
+                                print(Us,"Perdon no pude encontrar lo que pedias",Us)
                         case 3:
                             Numero = input("DIGITE SU NUMERO DE DOCUMENTO: ")
                             proceso = Datos_Quirurgico(Numero)
                             if proceso:
-                                print(Us, "RESULTADOS QUIRURGICOS")
+                                print(Us,"RESULTADOS QUIRURGICOS",Us)
                                 for procesos in proceso:
                                     print(procesos)
                             else :
-                                print("NO SIRVO")
+                                print(Us,"Perdon no pude encontrar lo que pedias",Us)
                         case 4:
                             Numero = input("DIGITE SU NUMERO DE DOCUMENTO: ")
                             antro = Datos_Antropometricos(Numero)
                             if antro:
-                                print(Us, "DATOS ANTROPOMETRICOS")
+                                print(Us,"DATOS ANTROPOMETRICOS",Us)
                                 for antropo in antro:
                                     print(antropo)
                             else :
-                                print("NO SIRVO")
+                                print(Us,"Perdon no pude encontrar lo que pedias",Us)
                         case 5:
                             Numero = input("DIGITE SU NUMERO DE DOCUMENTO: ")
                             personales = Datos_Antecedentes(Numero)
                             if personales:
-                                print(Us, "MIS ANTECEDENTES")
+                                print(Us,"MIS ANTECEDENTES",Us)
                                 for personal in personales:
                                     print(personal)
                             else :
-                                print("NO SIRVO")
-                        case 6:
+                                print(Us,"Perdon no pude encontrar lo que pedias",Us)
+                        case _:
                             pass
                 case 3:
                     print(Us,'IZEL SE DESPIDE',Us)
@@ -89,20 +89,20 @@ def Menu_Usuarios():
 def Menu_Doctor():
     while True:
         print(Us,'Bienvenido a IZEL doctor, ¿En que trabajaremos hoy?',Us)
-        print('1. Ingresar a consulta')
-        print('2. Cerrar Sesion')
+        print('1- Ingresar a consulta')
+        print('2- Cerrar Sesion')
         opcionP=int(input('¿Que accion desea consultar?: '))
         match opcionP:
                 case 1:
                     nro_doc =input('Ingrese el numero de documento del paciente: ')
-                    print('1. Visualizar perfil del paciente')
-                    print('2. Visualizar antecedentes del paciente')
-                    print('3. Visualizar datos antropologicos')
-                    print('4. Visualizar procesos quirurjicos')
-                    print('5. Visualizaar historial de vacunacion')
-                    print('6. Agregar datos a la consulta')
-                    print('7. Agregar datos antropologicos a la consulta')
-                    print('8. Ordenar una formula medica')
+                    print('1- Visualizar perfil del paciente')
+                    print('2- Visualizar antecedentes del paciente')
+                    print('3- Visualizar datos antropologicos')
+                    print('4- Visualizar procesos quirurjicos')
+                    print('5- Visualizaar historial de vacunacion')
+                    print('6- Agregar datos a la consulta')
+                    print('7- Agregar datos antropologicos a la consulta')
+                    print('8- Ordenar una formula medica')
                     elecionConsulta=int(input('¿Que desea realizar?: '))
                     match elecionConsulta:
                         case 1:
@@ -111,39 +111,39 @@ def Menu_Doctor():
                                 print(Us,"PERFIL PACIENTE",Us)
                                 print(perfil)
                             else:
-                                print("Fallo")                            
+                                print(Us,"Perdon no pude encontrar lo que pedias",Us)                            
                         case 2:
                                 personales = Datos_Antecedentes(nro_doc)
                                 if personales:
-                                    print(Us, "Antecedentes personales del paciente")
+                                    print(Us,"Antecedentes personales del paciente",Us)
                                     for personal in personales:
                                         print(personal)
                                 else :
-                                    print("NO SIRVO")
+                                    print(Us,"Perdon no pude encontrar lo que pedias",Us)
                         case 3:
                                 antro = Datos_Antropometricos(nro_doc)
                                 if antro:
-                                    print(Us, "Datos antropometricos del paciente")
+                                    print(Us,"Datos antropometricos del paciente",Us)
                                     for antropo in antro:
                                         print(antropo)
                                 else:
-                                    print("NO SIRVO")
+                                    print(Us,"Perdon no pude encontrar lo que pedias",Us)
                         case 4:
                                 proceso = Datos_Quirurgico(nro_doc)
                                 if proceso:
-                                    print(Us, "Procesos quirurjicos del paciente")
+                                    print(Us,"Procesos quirurjicos del paciente",Us)
                                     for procesos in proceso:
                                         print(procesos)
                                 else :
-                                    print("NO SIRVO")
+                                    print(Us,"Perdon no pude encontrar lo que pedias",Us)
                         case 5:                     
                                 vacunas = Datos_Vacunas(nro_doc)
                                 if vacunas:
-                                    print(Us, "Historial de vacunas del paciente")
+                                    print(Us,"Historial de vacunas del paciente",Us)
                                     for vacuna in vacunas:
                                         print(vacuna)
                                     else :
-                                        print("NO SIRVO")
+                                        print(Us,"Perdon no pude encontrar lo que pedias",Us)
                         case 6:
                             print()
                             print(Us,'Agregar datos de la consulta',Us)
@@ -169,11 +169,10 @@ def Menu_Doctor():
 def Menu_Auxiliar():
     while True:
         print()
-        print(Us,"BIENVENIDO AUXILIAR, ¿EN QUE TE AYUDARE HOY?")
+        print(Us,"BIENVENIDO AUXILIAR, ¿EN QUE TE AYUDARE HOY?",Us)
         print()
-        print("1-Registro Datos De Usuario")
-        print("2-PROXIMAMENTE")
-        print("3-Salir")
+        print("1- Registro Datos De Usuario")
+        print("2- Salir")
         Aux=int(input())
         match Aux :
             case 1:
@@ -200,8 +199,6 @@ def Menu_Auxiliar():
                 
                 Registrar_Usuario(paciente)
             case 2:
-                print("OYE DEJAME TRABAJAR ESPERATE HASTA LA PROXIMA ACTUALIZACIÓN!!! ATT: IZEL")
-            case 3:
                 print(Us,"HOY FUE UN DIA CANSADO, NOS VEMOS MAÑANA :) ",Us)
                 break
             
@@ -209,38 +206,33 @@ def Menu_Auxiliar():
 def Menu_Administrador():
     while True:
         print()
-        print(Us,"BIENVENIDO SOY IZEL, ¿ERES DIOS?")
+        print(Us,"BIENVENIDO SOY IZEL, ¿ERES DIOS?",Us)
         print()
-        print("1-Registrar Turnos")
-        print("2-Ver Departamentos")
-        print("3-Registrar a Medicos")
-        print("4-Registrar Auxiliares")
-        print("5-Llenar datos de empleados")
-        print("6-Salir")
+        print("1- Ver Departamentos")
+        print("2- Registrar a Medicos")
+        print("3- Registrar Auxiliares")
+        print("4- Llenar datos de empleados")
+        print("5- Salir")
         Admin=int(input())
         match Admin:
             case 1:
                 print()
-                print("MENU TURNOS")
+                print(Us,"MIRE JEFE LOS DEPARTEMENTOS ACTIVOS",Us)
                 print()
-            case 2:
-                print()
-                print("MIRE JEFE LOS DEPARTEMENTOS ACTIVOS")
-                print()
-                print("1-ODONTOLOGIA")
-                print("2-PEDIATRIA")
-                print("3-DERMATOLOGIA")
-                print("4-ORTOPEDIA Y TRAUMATOLOGIA")
-                print("5-CIRUGIA")
-                print("6-GINECOLOGIA")
-                print("7-PSIQUIATRIA Y SALUD MENTAL")
-                print("8-RADIOLOGIA")
-                print("9-VOLVER")
+                print("1- ODONTOLOGIA")
+                print("2- PEDIATRIA")
+                print("3- DERMATOLOGIA")
+                print("4- ORTOPEDIA Y TRAUMATOLOGIA")
+                print("5- CIRUGIA")
+                print("6- GINECOLOGIA")
+                print("7- PSIQUIATRIA Y SALUD MENTAL")
+                print("8- RADIOLOGIA")
+                print("9- VOLVER")
                 dep=int(input())
                 match dep:
                     case 1:
                         print()
-                        print("MEDICOS DE ODONTOLOGIA")
+                        print(Us,"MEDICOS DE ODONTOLOGIA",Us)
                         print()
                         posicionId = 1122 
                         odontologos = Visualizar_Departamentos(posicionId)
@@ -257,10 +249,10 @@ def Menu_Administrador():
                                     print(f"Fecha de Nacimiento: {odontologo['Fecha_Nacimiento']}")
                                     print(Us)  
                         else:
-                            print("No se encontraron odontólogos.")                        
+                            print(Us,"No se encontraron odontólogos.",Us)                        
                     case 2:
                         print()
-                        print("MEDICOS DE PEDIATRIA")
+                        print(Us,"MEDICOS DE PEDIATRIA",Us)
                         print()
                         posicionId = 111 
                         pediatras = Visualizar_Departamentos(posicionId)
@@ -277,10 +269,10 @@ def Menu_Administrador():
                                     print(f"Fecha de Nacimiento: {pediatra['Fecha_Nacimiento']}")
                                     print(Us)  
                         else:
-                            print("No se encontraron Pediatras.") 
+                            print(Us,"No se encontraron Pediatras.",Us) 
                     case 3:
                         print()
-                        print("MEDICOS DE DERMATOLOGIA")
+                        print(Us,"MEDICOS DE DERMATOLOGIA",Us)
                         print()
                         posicionId = 112 
                         dermatologos = Visualizar_Departamentos(posicionId)
@@ -297,10 +289,10 @@ def Menu_Administrador():
                                     print(f"Fecha de Nacimiento: {dermatologo['Fecha_Nacimiento']}")
                                     print(Us)  
                         else:
-                            print("No se encontraron Dermatologos.")                         
+                            print(Us,"No se encontraron Dermatologos.",Us)                         
                     case 4:
                         print()
-                        print("MEDICOS DE ORTOPEDIA Y TRAUMATOLOGIA")
+                        print(Us,"MEDICOS DE ORTOPEDIA Y TRAUMATOLOGIA",Us)
                         print()
                         posicionId = 116
                         traumatologia = Visualizar_Departamentos(posicionId)
@@ -317,10 +309,10 @@ def Menu_Administrador():
                                     print(f"Fecha de Nacimiento: {ortopedia['Fecha_Nacimiento']}")
                                     print(Us)  
                         else:
-                            print("No se encontraron Ortopedistas y Traumatologicos.")
+                            print(Us,"No se encontraron Ortopedistas y Traumatologicos.",Us)
                     case 5:
                         print()
-                        print("MEDICOS DE CIRUGIA")
+                        print(Us,"MEDICOS DE CIRUGIA",Us)
                         print()
                         posicionId = 114 
                         cirujanos = Visualizar_Departamentos(posicionId)
@@ -337,10 +329,10 @@ def Menu_Administrador():
                                     print(f"Fecha de Nacimiento: {cirujia['Fecha_Nacimiento']}")
                                     print(Us)  
                         else:
-                            print("No se encontraron Cirujanos.")
+                            print(Us,"No se encontraron Cirujanos.",Us)
                     case 6:
                         print()
-                        print("MEDICOS DE GINECOLOGIA")
+                        print(Us,"MEDICOS DE GINECOLOGIA",Us)
                         print()
                         posicionId = 115
                         ginecologos = Visualizar_Departamentos(posicionId)
@@ -357,10 +349,10 @@ def Menu_Administrador():
                                     print(f"Fecha de Nacimiento: {ginecologia['Fecha_Nacimiento']}")
                                     print(Us)  
                         else:
-                            print("No se encontraron Ginecologos.")
+                            print(Us,"No se encontraron Ginecologos.",Us)
                     case 7:
                         print()
-                        print("MEDICOS DE PSIQUIATRIA Y SALUD MENTAL")
+                        print(Us,"MEDICOS DE PSIQUIATRIA Y SALUD MENTAL",Us)
                         print()
                         posicionId = 117
                         Psiquiatra = Visualizar_Departamentos(posicionId)
@@ -377,10 +369,10 @@ def Menu_Administrador():
                                     print(f"Fecha de Nacimiento: {mental['Fecha_Nacimiento']}")
                                     print(Us)  
                         else:
-                            print("No se encontraron Psiquiatras.")
+                            print(Us,"No se encontraron Psiquiatras.",Us)
                     case 8: 
                         print()
-                        print("MEDICOS DE RADIOLOGIA")
+                        print(Us,"MEDICOS DE RADIOLOGIA",Us)
                         print()
                         posicionId = 118 
                         radiologias = Visualizar_Departamentos(posicionId)
@@ -397,36 +389,36 @@ def Menu_Administrador():
                                     print(f"Fecha de Nacimiento: {radiologia['Fecha_Nacimiento']}")
                                     print(Us)  
                         else:
-                            print("No se encontraron Radiologos.")
+                            print(Us,"No se encontraron Radiologos.",Us)
                     case 9:
                         pass
-            case 3:
+            case 2:
                 print()
-                print("REGISTRO DE CUENTAS MEDICAS")
+                print(Us,"REGISTRO DE CUENTAS MEDICAS",Us)
                 print()
-                print("A CONTINUACIÓN ESCRIBA EL CORREO Y CONTRASEÑA DE LAS CUENTAS DE LOS MEDICOS NUEVOS")
+                print(Pon,"A CONTINUACIÓN ESCRIBA EL CORREO Y CONTRASEÑA DE LAS CUENTAS DE LOS MEDICOS NUEVOS",Pon)
                 correo = input("Correo Electrónico: ")
                 contraseña = input("Contraseña: ")
                 tipo = input("Ingrese la especialidad del doctor: ")
                 registrar_Cuenta(correo, contraseña, tipo)
                 print(Us,"CUENTA CREADA CON EXITO, NUEVO MEDICO EN LA BASE DE DATOS ",Us)
-            case 4:
+            case 3:
                 print()
-                print("REGISTRO DE CUENTAS AUXILIARES")
+                print(Us,"REGISTRO DE CUENTAS AUXILIARES",Us)
                 print() 
-                print("A CONTINUACION ESCRIBA EL CORREO Y CONTRASEÑA DE LAS CUENTAS DE LOS AUXILIARES NUEVOS")
+                print(Pon,"A CONTINUACION ESCRIBA EL CORREO Y CONTRASEÑA DE LAS CUENTAS DE LOS AUXILIARES NUEVOS",Pon)
                 correo = input("Correo Electrónico: ")
                 contraseña = input("Contraseña: ")
                 tipo = ("Auxiliar")
                 registrar_Cuenta(correo, contraseña, tipo)
                 print(Us,"CUENTA CREADA CON EXITO, NUEVO AUXILIAR EN LA BASE DE DATOS ",Us)
-            case 5:
+            case 4:
                 print()
-                print("REGISTRO DE DATOS SOBRE LOS EMPLEADOS")
+                print(Us,"REGISTRO DE DATOS SOBRE LOS EMPLEADOS",Us)
                 print()
-                print("1-Registrar datos personales")
-                print("2-Registrar datos de contratacion")
-                print("4-VOLVER")
+                print("1- Registrar datos personales")
+                print("2- Registrar datos de contratacion")
+                print("3- VOLVER")
                 reg=int(input())
                 match reg:
                     case 1:
@@ -456,7 +448,7 @@ def Menu_Administrador():
                             print('Error al registrar',e)
                     case 2:
                         print()
-                        print("REGISTRO DE CONTRATO")
+                        print(Us,"REGISTRO DE CONTRATO",Us)
                         print()
                         Id = int(input("Ingrese id de reconocimiento: "))
                         Fecha_Contratacion = input("Digite la fecha actual: ")
@@ -469,8 +461,8 @@ def Menu_Administrador():
                             print('Error al registrar',e)
                     case 3:
                         pass
-            case 6:
-                print("HASTA LA VISTA BEIBI >:c ")
+            case 5:
+                print(Us,"HASTA LA VISTA BEIBI >:c ",Us)
                 break
             
             
@@ -485,7 +477,7 @@ Inicio = 0
 
 while Inicio != 3:
         print()
-        print(Imp, "BIENVENIDO A IZEL")
+        print(Imp,"BIENVENIDO A IZEL",Imp)
         print()
         print(Imp, "1. INICIAR SESION")
         print(Imp, "2. REGISTRARSE")
@@ -494,7 +486,7 @@ while Inicio != 3:
         match Iniciar:
             case 1:
                 print()
-                print(Imp," INICIAR SESION")
+                print(Imp," INICIAR SESION",Imp)
                 print()
                 print(Dec,"Correo Electronico")
                 Email=input(Pon)

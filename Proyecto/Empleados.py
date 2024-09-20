@@ -1,5 +1,4 @@
 from persona import*
-from experiencia import*
 from ips import *
 from Posiciones import *
 from estudios import *
