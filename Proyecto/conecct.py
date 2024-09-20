@@ -7,14 +7,14 @@ from medico import *
 
 Myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 Mydb = Myclient["Izel"]
-Autenti = Mydb["Autentificacion"]
-Vacunas = Mydb["Vacunas"]
+AutentiDB = Mydb["Autentificacion"]
+VacunasDB = Mydb["Vacunas"]
 ConsultaDB =Mydb["Consulta"]
-Quirurgico = Mydb["Quirurgicos"]
+QuirurgicoDB = Mydb["Quirurgicos"]
 AntropoDB = Mydb["Antropometricos"]
-Antecedentes = Mydb["Antecedentes"]
-Formula= Mydb ["FormulaMedica"]
-PersonaDB= Mydb ['Personas']
+AntecedentesDB = Mydb["Antecedentes"]
+FormulaDB= Mydb ["FormulaMedica"]
+PersonaDB= Mydb ['Persona']
 EmpleadoDB= Mydb ['Empleados']
 
 def verificar(Email,Pin):
@@ -23,7 +23,7 @@ def verificar(Email,Pin):
             "Contraseña":Pin
         }
         
-        usuario=Autenti.find_one(Autentificacion)
+        usuario=AutentiDB.find_one(Autentificacion)
         
         if usuario:
             return True
@@ -32,7 +32,7 @@ def verificar(Email,Pin):
             return False
         
 def registrar_Cuenta(correo, contraseña, tipo):
-        if Autenti.find_one({"Correo": correo}):
+        if AutentiDB.find_one({"Correo": correo}):
             return print ("El correo electrónico ya está registrado.")
         else:
             nueva_Cuenta = {
@@ -41,12 +41,12 @@ def registrar_Cuenta(correo, contraseña, tipo):
                 "Tipo": tipo
             }
         
-        Autenti.insert_one(nueva_Cuenta)
+        AutentiDB.insert_one(nueva_Cuenta)
 
 
 def tipo_usuario(correo):
         Tip= {"Correo": correo}
-        usuario = Autenti.find_one(Tip)
+        usuario = AutentiDB.find_one(Tip)
         
         if usuario:
             return usuario.get("Tipo")
@@ -54,8 +54,24 @@ def tipo_usuario(correo):
             print("Usuario no encontrado")
             return None
 
+
+def Datos_Perfil(Email):
+    Perfil=PersonaDB.find_one({"Correo":Email},
+                       {"Nombre.Nombre1":1,
+                        "Apellido.Apellido1":1,
+                        "Genero":1,
+                        "Tipo_Documento":1,
+                        "Numero_Documento":1,
+                        "Ocupación":1,
+                        "Eps":1,
+                        "_id":0
+                        }
+                       )
+    return Perfil
+
+
 def Datos_Vacunas(Numero):
-    resultados = Vacunas.find({"Usuario_id": Numero})
+    resultados = VacunasDB.find({"Usuario_id": Numero})
     vacunas = [x for x in resultados]
     return vacunas
 
@@ -65,7 +81,7 @@ def Datos_Consulta(Numero):
     return consulta
 
 def Datos_Quirurgico (Numero):
-    resultados = Quirurgico.find({"Usuario_id": Numero})
+    resultados = QuirurgicoDB.find({"Usuario_id": Numero})
     quirur = [x for x in resultados]
     return quirur 
 
@@ -75,12 +91,24 @@ def Datos_Antropometricos(Numero):
     return date
 
 def Datos_Antecedentes(Numero):
-    resultados = Antecedentes.find({"Usuario_id": Numero})
+    resultados = AntecedentesDB.find({"Usuario_id": Numero})
     antes = [x for x in resultados]
     return antes
    
 
-
+def Doctor_Paciente (nro_doc):
+    Perfil=PersonaDB.find_one({"Numero_Documento":nro_doc},
+                       {"Nombre.Nombre1":1,
+                        "Apellido.Apellido1":1,
+                        "Genero":1,
+                        "Tipo_Documento":1,
+                        "Numero_Documento":1,
+                        "Ocupación":1,
+                        "Eps":1,
+                        "_id":0
+                        }
+                       )
+    return Perfil
 
 def Registrar_Usuario(p):
     
@@ -111,7 +139,6 @@ def Registrar_Usuario(p):
             }
                 
         PersonaDB.insert_one(Nuevo_Registro)
-        print("LLENADO DE DATOS EXITOSO")
         
 def Registrar_Contrato (c):
     if EmpleadoDB.find_one({"Empleado_id": c.getID()}):
@@ -122,11 +149,12 @@ def Registrar_Contrato (c):
             "Empleado_id":c.getID(),
             "Fecha_Contratacion":c.getFecha_Contratacion(),
             "Posicion_Id":c.getPosicion(),
-            "Persona_Id":c.getNumeroDoc()
+            "Persona_Id":c.getIdPersona()
         }
     
     EmpleadoDB.insert_one(Nuevo_contrato)
     print("CONTRATO REGISTRADO")
+    
     
 def agregarDatosConsulta(nro_doc,p):
     nuevaConsulta={
@@ -166,4 +194,31 @@ def agregarFormula(nro_doc,p):
          "Indicaciones":p.getIndicaciones(),
          "ViaAdministracion":p.getViaAdministracion()
     }
-    Formula.insert_one(nuevaFormula)
+    FormulaDB.insert_one(nuevaFormula)
+
+def Visualizar_Departamentos(posicionId):
+    resultados = EmpleadoDB.find({"Posicion_Id": posicionId})
+
+    empleados_info = []
+    for empleado in resultados:
+        persona = PersonaDB.find_one({"Numero_Documento": empleado["Persona_Id"]})
+        if persona:
+            empleado_info = {
+                "Empleado_id": empleado["Empleado_id"],
+                "Nombre": persona["Nombre"]["Nombre1"] + " " + persona["Nombre"].get("Nombre2", ""),
+                "Apellido": persona["Apellido"]["Apellido1"] + " " + persona["Apellido"].get("Apellido2", ""),
+                "Genero": persona["Genero"],
+                "Correo": persona["Correo"],
+                "Telefono": persona["Teléfono"],
+                "Tipo_Documento": persona["Tipo_Documento"],
+                "Numero_Documento": persona["Numero_Documento"],
+                "Fecha_Nacimiento": persona["Fecha_Nacimiento"],
+            }
+            empleados_info.append(empleado_info)
+
+    return empleados_info
+
+    
+    
+
+    
