@@ -70,29 +70,44 @@ def Datos_Perfil(Email):
     return Perfil
 
 
-def Datos_Vacunas(Numero):
-    resultados = VacunasDB.find({"Usuario_id": Numero})
-    vacunas = [x for x in resultados]
+def Datos_Vacunas(Email):
+    prefil=({"Correo":Email})
+    Num=PersonaDB.find_one(prefil)
+    if Num:
+        resultados = VacunasDB.find({"Usuario_id": Num.get("Numero_Documento") })
+        vacunas = [x for x in resultados]
     return vacunas
 
-def Datos_Consulta(Numero):
-    resultados = Consulta.find({"Usuario_id": Numero})
-    consulta = [x for x in resultados]
+def Datos_Consulta(Email):
+    prefil=({"Correo":Email})
+    Num=PersonaDB.find_one(prefil)
+    if Num:
+        resultados = ConsultaDB.find({"Usuario_id": Num.get("Numero_Documento")})
+        consulta = [x for x in resultados]
     return consulta
 
-def Datos_Quirurgico (Numero):
-    resultados = QuirurgicoDB.find({"Usuario_id": Numero})
-    quirur = [x for x in resultados]
+def Datos_Quirurgico (Email):
+    prefil=({"Correo":Email})
+    Num=PersonaDB.find_one(prefil)
+    if Num:
+        resultados = QuirurgicoDB.find({"Usuario_id":Num.get("Numero_Documento")})
+        quirur = [x for x in resultados]
     return quirur 
 
-def Datos_Antropometricos(Numero):
-    resultados = AntropoDB.find({"Usuario_id": Numero})
-    date = [x for x in resultados]
+def Datos_Antropometricos(Email):
+    prefil=({"Correo":Email})
+    Num=PersonaDB.find_one(prefil)
+    if Num:
+        resultados = AntropoDB.find({"Usuario_id":Num.get("Numero_Documento")})
+        date = [x for x in resultados]
     return date
 
-def Datos_Antecedentes(Numero):
-    resultados = AntecedentesDB.find({"Usuario_id": Numero})
-    antes = [x for x in resultados]
+def Datos_Antecedentes(Email):
+    prefil=({"Correo":Email})
+    Num=PersonaDB.find_one(prefil)
+    if Num:
+        resultados = AntecedentesDB.find({"Usuario_id":Num.get("Numero_Documento")})
+        antes = [x for x in resultados]
     return antes
    
 

@@ -36,8 +36,7 @@ def Menu_Usuarios():
                     RESULTADOS=int(input())
                     match RESULTADOS:
                         case 1:
-                            Numero = input("DIGITE SU NUMERO DE DOCUMENTO: ")
-                            vacunas = Datos_Vacunas(Numero)
+                            vacunas = Datos_Vacunas(Email)
                             if vacunas:
                                 print(Us,"MIS VACUNAS",Us)
                                 for vacuna in vacunas:
@@ -45,8 +44,7 @@ def Menu_Usuarios():
                             else :
                                 print(Us,"Perdon no pude encontrar lo que pedias",Us)  
                         case 2:
-                            Numero = input("DIGITE SU NUMERO DE DOCUMENTO: ")
-                            consulta = Datos_Consulta(Numero)
+                            consulta = Datos_Consulta(Email)
                             if consulta:
                                 print(Us,"MIS CONSULTAS",Us)
                                 for consultas in consulta:
@@ -54,8 +52,7 @@ def Menu_Usuarios():
                             else :
                                 print(Us,"Perdon no pude encontrar lo que pedias",Us)
                         case 3:
-                            Numero = input("DIGITE SU NUMERO DE DOCUMENTO: ")
-                            proceso = Datos_Quirurgico(Numero)
+                            proceso = Datos_Quirurgico(Email)
                             if proceso:
                                 print(Us,"RESULTADOS QUIRURGICOS",Us)
                                 for procesos in proceso:
@@ -63,8 +60,7 @@ def Menu_Usuarios():
                             else :
                                 print(Us,"Perdon no pude encontrar lo que pedias",Us)
                         case 4:
-                            Numero = input("DIGITE SU NUMERO DE DOCUMENTO: ")
-                            antro = Datos_Antropometricos(Numero)
+                            antro = Datos_Antropometricos(Email)
                             if antro:
                                 print(Us,"DATOS ANTROPOMETRICOS",Us)
                                 for antropo in antro:
@@ -72,8 +68,7 @@ def Menu_Usuarios():
                             else :
                                 print(Us,"Perdon no pude encontrar lo que pedias",Us)
                         case 5:
-                            Numero = input("DIGITE SU NUMERO DE DOCUMENTO: ")
-                            personales = Datos_Antecedentes(Numero)
+                            personales = Datos_Antecedentes(Email)
                             if personales:
                                 print(Us,"MIS ANTECEDENTES",Us)
                                 for personal in personales:
