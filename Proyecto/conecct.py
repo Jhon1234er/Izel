@@ -109,7 +109,26 @@ def Datos_Antecedentes(Email):
         resultados = AntecedentesDB.find({"Usuario_id":Num.get("Numero_Documento")})
         antes = [x for x in resultados]
     return antes
-   
+
+def Doc_Vacunas(Numero):
+    resultados = VacunasDB.find({"Usuario_id": Numero})
+    vacunas = [x for x in resultados]
+    return vacunas
+
+def Doc_Quirurgico (Numero):
+    resultados = QuirurgicoDB.find({"Usuario_id": Numero})
+    gico = [x for x in resultados]
+    return gico 
+
+def Doc_Antecedentes(Numero):
+    resultados = AntecedentesDB.find({"Usuario_id": Numero})
+    dentes = [x for x in resultados]
+    return dentes
+
+def Doc_Antropometricos(Numero):
+    resultados = AntropoDB.find({"Usuario_id": Numero})
+    pologico = [x for x in resultados]
+    return pologico
 
 def Doctor_Paciente (nro_doc):
     Perfil=PersonaDB.find_one({"Numero_Documento":nro_doc},

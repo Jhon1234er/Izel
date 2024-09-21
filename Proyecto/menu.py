@@ -77,7 +77,7 @@ def Menu_Usuarios():
                                 print(Us,"Perdon no pude encontrar lo que pedias",Us)
                         case _:
                             pass
-                case 3:
+                case _:
                     print(Us,'IZEL SE DESPIDE',Us)
                     break
 
@@ -98,6 +98,7 @@ def Menu_Doctor():
                     print('6- Agregar datos a la consulta')
                     print('7- Agregar datos antropologicos a la consulta')
                     print('8- Ordenar una formula medica')
+                    print('9-Volver')
                     elecionConsulta=int(input('¿Que desea realizar?: '))
                     match elecionConsulta:
                         case 1:
@@ -108,7 +109,7 @@ def Menu_Doctor():
                             else:
                                 print(Us,"Perdon no pude encontrar lo que pedias",Us)                            
                         case 2:
-                                personales = Datos_Antecedentes(nro_doc)
+                                personales = Doc_Antecedentes(nro_doc)
                                 if personales:
                                     print(Us,"Antecedentes personales del paciente",Us)
                                     for personal in personales:
@@ -116,7 +117,7 @@ def Menu_Doctor():
                                 else :
                                     print(Us,"Perdon no pude encontrar lo que pedias",Us)
                         case 3:
-                                antro = Datos_Antropometricos(nro_doc)
+                                antro = Doc_Antropometricos(nro_doc)
                                 if antro:
                                     print(Us,"Datos antropometricos del paciente",Us)
                                     for antropo in antro:
@@ -124,7 +125,7 @@ def Menu_Doctor():
                                 else:
                                     print(Us,"Perdon no pude encontrar lo que pedias",Us)
                         case 4:
-                                proceso = Datos_Quirurgico(nro_doc)
+                                proceso = Doc_Quirurgico(nro_doc)
                                 if proceso:
                                     print(Us,"Procesos quirurjicos del paciente",Us)
                                     for procesos in proceso:
@@ -132,13 +133,13 @@ def Menu_Doctor():
                                 else :
                                     print(Us,"Perdon no pude encontrar lo que pedias",Us)
                         case 5:                     
-                                vacunas = Datos_Vacunas(nro_doc)
+                                vacunas = Doc_Vacunas(nro_doc)
                                 if vacunas:
                                     print(Us,"Historial de vacunas del paciente",Us)
                                     for vacuna in vacunas:
                                         print(vacuna)
-                                    else :
-                                        print(Us,"Perdon no pude encontrar lo que pedias",Us)
+                                else :
+                                    print(Us,"Perdon no pude encontrar lo que pedias",Us)
                         case 6:
                             print()
                             print(Us,'Agregar datos de la consulta',Us)
@@ -155,10 +156,48 @@ def Menu_Doctor():
                             try:
                                 consultaInsert= Consulta(descripcion_E,motivo_C,diagnostico,plan_Terap,epicrisis,nombre_A,parentesco_A,conclusiones)
                                 agregarDatosConsulta(nro_doc,consultaInsert)
-                                print('Exitoso')
+                                print(Us,'Exitoso',Us)
                             except Exception as e:
                                 print('Error al guardar la consulta',e)
-                case 2:
+                        case 7:
+                            print()
+                            print(Us,'Agregar Atropologicos',Us)
+                            print()
+                            peso=input('Ingrese peso: ')
+                            Temperatura=input('Ingrese temperatura: ')
+                            Talla=input('Ingrese talla: ')
+                            Imc=input('Ingrese el Imc: ')
+                            Pulso=input('Ingrese el pulso: ')                                
+                            Frecuencia_R=input('Ingrese la frecuencia respiratoria: ')
+                            Presion_A=input('Ingrese presion arterial: ')
+                            
+                            try:
+                                ATPInsert= antropometricos(peso,Temperatura,Talla,Imc,Pulso,Frecuencia_R,Presion_A)
+                                agregarDatosATP(nro_doc,ATPInsert)
+                                print(Us,'Exitoso',Us)
+                            except Exception as e:
+                                print('Error al guardar datos atropologicos',e)
+                        case 8:
+                            print()
+                            print(Us,'Agregar Fromula',Us)
+                            print()
+                            Codigo_F=input('Ingrese Codigo : ')
+                            Cantidad=input('Ingrese Cantidad Sumistrada: ')
+                            Duracion=input('Ingrese Duracion de cita: ')
+                            Concentracion=input('Ingrese Concentracion: ')
+                            Medicamento=input('Ingrese el Medicamento : ')                                
+                            Indicaciones=input('Ingrese las Indicaciones: ')
+                            ViaAdministracion=input('Ingrese la via de administracion: ')
+                                
+                            try:
+                                FormulaInsert= FormulaMedica(Codigo_F,Cantidad,Duracion,Concentracion,Medicamento,Indicaciones,ViaAdministracion)
+                                agregarFormula(nro_doc,FormulaInsert)
+                                print(Us,'Exitoso',Us)
+                            except Exception as e:
+                                print('Error al guardar formula medica',e)
+                        case _:
+                            pass
+                case _:
                     print(Us,"FUE UN PLACER TRABAJAR CON USTED DOCTOR",Us)
                     break
 def Menu_Auxiliar():
@@ -190,10 +229,13 @@ def Menu_Auxiliar():
                 eps = input("EPS: ")
                 Dirección = input("Dirección: ")
                 
-                paciente = Paciente(nombre1, nombre2, apellido1, apellido2, genero, rh, correo, telefono, tipo_doc, nro_doc, fecha_nacimiento, tipo_poblacion, ocupacion, eps, Dirección)
-                
-                Registrar_Usuario(paciente)
-            case 2:
+                try:
+                    paciente = Paciente(nombre1, nombre2, apellido1, apellido2, genero, rh, correo, telefono, tipo_doc, nro_doc, fecha_nacimiento, tipo_poblacion, ocupacion, eps, Dirección)
+                    Registrar_Usuario(paciente)
+                    print(Us,"Llenado de datos exitoso",Us)
+                except Exception as e:
+                    print('Error al guadar los datos ',e)
+            case _:
                 print(Us,"HOY FUE UN DIA CANSADO, NOS VEMOS MAÑANA :) ",Us)
                 break
             
@@ -385,7 +427,7 @@ def Menu_Administrador():
                                     print(Us)  
                         else:
                             print(Us,"No se encontraron Radiologos.",Us)
-                    case 9:
+                    case _:
                         pass
             case 2:
                 print()
@@ -394,7 +436,7 @@ def Menu_Administrador():
                 print(Pon,"A CONTINUACIÓN ESCRIBA EL CORREO Y CONTRASEÑA DE LAS CUENTAS DE LOS MEDICOS NUEVOS",Pon)
                 correo = input("Correo Electrónico: ")
                 contraseña = input("Contraseña: ")
-                tipo = input("Ingrese la especialidad del doctor: ")
+                tipo = ("Doctor")
                 registrar_Cuenta(correo, contraseña, tipo)
                 print(Us,"CUENTA CREADA CON EXITO, NUEVO MEDICO EN LA BASE DE DATOS ",Us)
             case 3:
@@ -454,9 +496,9 @@ def Menu_Administrador():
                             Registrar_Contrato(contrato)
                         except Exception as e:
                             print('Error al registrar',e)
-                    case 3:
+                    case _:
                         pass
-            case 5:
+            case _:
                 print(Us,"HASTA LA VISTA BEIBI >:c ",Us)
                 break
             
@@ -507,6 +549,6 @@ while Inicio != 3:
                 tipo = ("Usuario")
                 registrar_Cuenta(correo, contraseña, tipo)
                 print(Us,"Registro exitoso. Ahora puedes iniciar sesión.",Us)
-            case 3:
+            case _:
                 print(Us,"Gracias por usar IZEL",Us)
                 break

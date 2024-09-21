@@ -1,7 +1,7 @@
 from persona import*
 from ips import *
 from Posiciones import *
-from estudios import *
+
 
 class Empleados():
     def __init__(self,Id,Fecha_Contratacion,Posicion_Id,Persona_Id):
